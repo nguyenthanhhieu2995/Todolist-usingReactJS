@@ -1,5 +1,10 @@
+::-webkit-input-placeholder { 
+  color: #ddd;
+}
 .App {
-  text-align: center;
+  width : 500px;
+  margin: 0 auto;
+  border : 1px solid rgb(167, 167, 167);
 }
 
 .App-logo {
@@ -7,18 +12,39 @@
   height: 40vmin;
   pointer-events: none;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.App .Header {
+  padding: 10px 5px; 
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  border-bottom: 1px solid #bebebe;
 }
-
+.App .Header input {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  color: #4d4d4d;
+  padding-left: 10px;
+  border: none;
+  width: 100%;
+}
+.App .Header input:focus {
+  outline: none;
+}
+.App .Footer {
+  display: flex;
+  justify-content: space-around;
+  margin: 3px;
+  padding: 7px;
+}
+.App .Footer a {
+  padding: 3px 7px;
+  color:#4b4747;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+}
+.App .Footer a:hover {
+  border-color: #1f090950;
+}
 .App-link {
   color: #61dafb;
 }
