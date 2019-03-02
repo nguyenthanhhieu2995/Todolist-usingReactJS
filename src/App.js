@@ -15,16 +15,14 @@ class App extends Component {
     this.mData = {
       newItem : '',
       currentFilter : 'all',  //'all','active','completed'
-      todoItems : [
-        { title : 'đi đổ xăng' , isComplete : false},
-        { title : 'mua bim bim', isComplete : false},
-        { title : 'đi đá bóng' , isComplete : false}
-      ]
+      todoItems : JSON.parse(localStorage.getItem('todoList'))
     };
     this.state = this.mData;
+
     this.onKeyUp = this.onKeyUp.bind(this);
     this.onChange = this.onChange.bind(this);
     this.itemOnclickAll = this.itemOnclickAll.bind(this);
+    this.deleteInput = this.deleteInput.bind(this);
   }
   itemOnclickAll (event) {
     const { todoItems } = this.mData;
@@ -58,9 +56,17 @@ class App extends Component {
       const { todoItems } = this.mData;
       const isComplete = item.isComplete;
       const index = todoItems.indexOf(item);
-
+      this.mData.newItem = this.state.newItem;
       this.mData.todoItems[index].isComplete = !isComplete;
-
+      this.setState(this.mData);
+    }
+  }
+  deleteItem(item) {
+    return () => {
+      const { todoItems } = this.mData;
+      const index = todoItems.indexOf(item);
+      
+      this.mData.todoItems.splice(index,1);
       this.setState(this.mData);
     }
   }
@@ -77,13 +83,17 @@ class App extends Component {
       this.mData.todoItems.push({
         title : text, isComplete : false
       });
-
       this.setState(this.mData);
     } 
   }
   onChange (event) {
     this.setState({
       newItem: event.target.value
+    })
+  }
+  deleteInput () {
+    this.setState({
+      newItem : ''
     })
   }
 
@@ -115,23 +125,42 @@ class App extends Component {
       }
     }
   }
-
+  componentWillMount() {
+    console.log('--->componentWillMount()--->render()');
+  }
+  componentDidMount() {
+    console.log('--->componentDidMount()')
+  }
+  componentWillUpdate() {
+    console.log('--->componentWillUpdate()--->render()');
+  }
+  componentDidUpdate() {
+    console.log('-->componentDidUpdate()')
+  }
   render() {
-    // localStorage.setItem('todoList',this.state.todoItems);
     const { todoItems,newItem} = this.state;
+
+    if (!localStorage.getItem('todoList')) {
+      localStorage.setItem('todoList','[]')
+    } else {
+      localStorage.setItem('todoList',JSON.stringify(todoItems));
+    }
+
     return (
       <div className="App">
         <InputItem
           itemOnclickAll={this.itemOnclickAll} 
           value={newItem}
           onChange={this.onChange}
-          onKeyUp={this.onKeyUp}/>
+          onKeyUp={this.onKeyUp}
+          deleteInput={this.deleteInput}/>
         {
           todoItems.map((item,index) =>
             <TodoItem 
               key={index} 
               item={item} 
-              itemOnclick={this.itemOnclicked(item)}/>
+              itemOnclick={this.itemOnclicked(item)}
+              deleteItem={this.deleteItem(item)}/>
           )
         }
         <div className='Footer'>

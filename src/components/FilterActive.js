@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import '../App.css';
 
+import { Button } from "reactstrap";
+
 class FilterActive extends Component {
     render() {
         const { selectFilter } = this.props;
         return(
-            <span><a href="#" onClick={selectFilter}>Active</a></span>
+            <span><Button color="warning" onClick={selectFilter}>Active</Button></span>
         )
     }
 }

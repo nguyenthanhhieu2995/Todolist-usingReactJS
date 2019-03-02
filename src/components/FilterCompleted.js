@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import '../App.css';
 
+import { Button } from "reactstrap";
+
 class FilterCompleted extends Component {
     render() {
         const { selectFilter } = this.props;
         return(
-            <span><a href="#" onClick={selectFilter}>Completed</a></span>
+            <span><Button color="success" onClick={selectFilter}>Completed</Button></span>
         )
     }
 }

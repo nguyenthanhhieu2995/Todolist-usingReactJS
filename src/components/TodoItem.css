@@ -9,6 +9,7 @@
 }
 .TodoItem > p {
     margin : 0 10px 0;
+    width: 85%;
 }
 .TodoItem:last-child {
     border-bottom: none;
