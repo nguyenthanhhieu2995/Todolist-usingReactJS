@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
+//import logo from './logo.svg';
 import './App.css';
 
 import TodoItem from './components/TodoItem';
@@ -125,18 +126,7 @@ class App extends Component {
       }
     }
   }
-  componentWillMount() {
-    console.log('--->componentWillMount()--->render()');
-  }
-  componentDidMount() {
-    console.log('--->componentDidMount()')
-  }
-  componentWillUpdate() {
-    console.log('--->componentWillUpdate()--->render()');
-  }
-  componentDidUpdate() {
-    console.log('-->componentDidUpdate()')
-  }
+  
   render() {
     const { todoItems,newItem} = this.state;
 

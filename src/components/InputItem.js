@@ -1,64 +1,53 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { InputGroup, InputGroupAddon, Button, Input} from 'reactstrap';
 
-import '../App.css';
+import './InputItem.css';
 import checkAll from '../img/check-all.svg';
-
-import { Button } from "reactstrap";
 
 class InputItem extends Component {
     constructor(props) {
         super(props);
         this.inputElement=React.createRef();
-    }
-    componentWillMount() {
-        console.log('--->componentWillMount()--->render()');
-    }
-    componentDidMount() {
-        console.log('--->componentDidMount()');
-        this.inputElement.current.focus();
-    }
-    componentWillReceiveProps(nextProps) {
-        console.log('--->componentWillReceiveProps()');
-    }
-    shouldComponentUpdate(nextProps) {
-        if ( this.props === nextProps) {
-            return false
-        } else return true
-    }
-    componentWillUpdate() {
-        console.log('--->componentWillUpdate()--->render()');
-      }
-    componentDidUpdate() {
-        console.log('-->componentDidUpdate()')
-    }
+    }  
     render() {
         let { value , onChange , onKeyUp , itemOnclickAll, deleteInput } = this.props;
+        
         return(
-            <div className="Header">
-                <img onClick={itemOnclickAll} 
-                    alt='check-all' 
-                    src={checkAll} 
-                    width={32} 
-                    height={32}/>
-                <input 
-                    type="text" 
+            <InputGroup>
+                <span>
+                    <img 
+                        src={checkAll}
+                        width={32} 
+                        height={32} 
+                        alt="check-all"
+                        onClick={itemOnclickAll}/>
+                </span>
+                <Input 
                     placeholder="What need to be done ?" 
+                    type="text"
                     value={value}
                     onChange={onChange}
                     onKeyUp={onKeyUp}
-                    ref={this.inputElement}
-                    />
-                <Button close onClick={deleteInput}></Button>
-            </div>
+                    ref={this.inputElement}/>
+                <InputGroupAddon addonType="append">
+                    <Button close onClick={deleteInput}></Button>
+                </InputGroupAddon> 
+            </InputGroup>
         )
     }
-}
+};
+
 InputItem.propTypes = {
-    value : PropTypes.string,
+    value : PropTypes.string.isRequired,
+    /** onClick handler */
     onChange : PropTypes.func,
+    /** onClick handler */
     onKeyUp : PropTypes.func,
+    /** onClick handler */
     itemOnclickAll : PropTypes.func,
-    deleteInput : PropTypes.func
-}
+    /** onClick handler */
+    deleteInput : PropTypes.func,
+    name :PropTypes.string
+};
 export default InputItem;
