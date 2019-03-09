@@ -1,11 +1,9 @@
-import { configure, addDecorator } from '@storybook/react';
-import { withInfo } from '@storybook/addon-info';
+import { configure } from '@storybook/react';
 
-addDecorator(withInfo); 
-
+// automatically import all files ending in *.stories.js
+const req = require.context('../stories', true, /.stories.js$/);
 function loadStories() {
-  require('../stories/index.js');
-  require('bootstrap/dist/css/bootstrap.min.css');
-  // You can require as many stories as you need.
+  req.keys().forEach(filename => req(filename));
 }
+
 configure(loadStories, module);
